@@ -1,18 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../src/App.css';
+import Input from './components/Input';
+import Button from './components/Button';
 
 function App() {
+  const [input, setInput] = useState(0);
+  console.log('input===', input);
+  const [previousNumber, setPreviousNumber] = useState();
+  console.log('previousNumber===', previousNumber);
+  const [currentNumber, setCurrentNumber] = useState();
+  console.log('currentNumber===', currentNumber);
+  const [operator, setOperator] = useState();
+  console.log('operator===', operator);
+
+  // useEffect(() => {}, []);
+
+  const addToInput = (value) => {
+    input === 0 ? setInput(value) : setInput(input + value);
+  };
+
+  const addDecimalToInput = (value) => {
+    if (input === 0) {
+      setInput(input + value);
+    } else if (input.indexOf('.') === -1) {
+      setInput(input + value);
+    }
+  };
+
+  const addZeroToInput = (value) => {
+    setInput(input + value);
+  };
+
+  const clearInput = () => {
+    setInput(0);
+  };
+
+  const additionBtn = () => {
+    setPreviousNumber(input);
+    setOperator('plus');
+    setInput(input);
+  };
+
+  const equalBtn = () => {
+    setCurrentNumber(input);
+    if (operator === 'plus') {
+      setInput(parseInt(previousNumber) + parseInt(currentNumber));
+    }
+  };
+
   return (
     <div className="main_container">
       <div></div>
       <div className="container">
-        <div className="input_container">
-          <div className="input">789787 </div>
-        </div>
+        <Input input={input}>{input}</Input>
 
         <div className="btn_container">
           <div className="btn_row">
-            <button className="btn_lightgrey">AC</button>
+            <Button onClickHandler={clearInput}>AC</Button>
             <button className="btn_lightgrey">+/-</button>
             <button className="btn_lightgrey">%</button>
             <button className="btn_orange">/</button>
@@ -24,27 +68,27 @@ function App() {
             <button className="btn_orange">m+</button>
           </div>
           <div className="btn_row">
-            <button className="btn_darkgrey">7</button>
-            <button className="btn_darkgrey">8</button>
-            <button className="btn_darkgrey">9</button>
+            <Button onClickHandler={addToInput}>7</Button>
+            <Button onClickHandler={addToInput}>8</Button>
+            <Button onClickHandler={addToInput}>9</Button>
             <button className="btn_orange">x</button>
           </div>
           <div className="btn_row">
-            <button className="btn_darkgrey">4</button>
-            <button className="btn_darkgrey">5</button>
-            <button className="btn_darkgrey">6</button>
+            <Button onClickHandler={addToInput}>4</Button>
+            <Button onClickHandler={addToInput}>5</Button>
+            <Button onClickHandler={addToInput}>6</Button>
             <button className="btn_orange">-</button>
           </div>
           <div className="btn_row">
-            <button className="btn_darkgrey">1</button>
-            <button className="btn_darkgrey">2</button>
-            <button className="btn_darkgrey">3</button>
-            <button className="btn_orange">+</button>
+            <Button onClickHandler={addToInput}>1</Button>
+            <Button onClickHandler={addToInput}>2</Button>
+            <Button onClickHandler={addToInput}>3</Button>
+            <Button onClickHandler={additionBtn}>+</Button>
           </div>
           <div className="btn_row">
-            <button className="btn_null">0</button>
-            <button className="btn_darkgrey">,</button>
-            <button className="btn_orange">=</button>
+            <Button onClickHandler={addZeroToInput}>0</Button>
+            <Button onClickHandler={addDecimalToInput}>.</Button>
+            <Button onClickHandler={equalBtn}>=</Button>
           </div>
         </div>
       </div>
