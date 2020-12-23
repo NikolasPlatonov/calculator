@@ -77,12 +77,21 @@ function App() {
   };
 
   const mPlusBtn = () => {
-    setMemory(input);
-    setInput('0');
+    setMemory(parseInt(memory) + parseInt(input));
+    setInput(input);
   };
 
   const mMinusBtn = () => {
+    setMemory(parseInt(memory) - parseInt(input));
+    setInput(input);
+  };
+
+  const mcBtn = () => {
     setMemory('');
+  };
+
+  const mrBtn = () => {
+    setMemory(input);
   };
 
   return (
@@ -97,9 +106,9 @@ function App() {
           <Button>+/-</Button>
           <Button>%</Button>
           <Button onClickHandler={divideBtn}>/</Button>
-          <Button>mc</Button>
-          <Button>mr</Button>
-          <Button>m-</Button>
+          <Button onClickHandler={mcBtn}>mc</Button>
+          <Button onClickHandler={mrBtn}>mr</Button>
+          <Button onClickHandler={mMinusBtn}>m-</Button>
           <Button onClickHandler={mPlusBtn}>m+</Button>
           <Button onClickHandler={addToInput}>7</Button>
           <Button onClickHandler={addToInput}>8</Button>
