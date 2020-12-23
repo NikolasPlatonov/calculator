@@ -16,7 +16,11 @@ function App() {
   // useEffect(() => {}, []);
 
   const addToInput = (value) => {
-    input === 0 ? setInput(value) : setInput(input + value);
+    if (input === 0) {
+      setInput(value);
+    } else {
+      setInput(input + value);
+    }
   };
 
   const addDecimalToInput = (value) => {
@@ -41,10 +45,18 @@ function App() {
     setInput(input);
   };
 
+  const subtraction = () => {
+    setPreviousNumber(input);
+    setOperator('minus');
+    setInput(input);
+  };
+
   const equalBtn = () => {
     setCurrentNumber(input);
     if (operator === 'plus') {
       setInput(parseInt(previousNumber) + parseInt(currentNumber));
+    } else if (operator === 'minus') {
+      setInput(parseInt(previousNumber) - parseInt(currentNumber));
     }
   };
 
@@ -57,27 +69,27 @@ function App() {
         <div className="btn_container">
           <div className="btn_row">
             <Button onClickHandler={clearInput}>AC</Button>
-            <button className="btn_lightgrey">+/-</button>
-            <button className="btn_lightgrey">%</button>
-            <button className="btn_orange">/</button>
+            <Button>+/-</Button>
+            <Button>%</Button>
+            <Button>/</Button>
           </div>
           <div className="btn_row">
-            <button className="btn_darkgrey">mc</button>
-            <button className="btn_darkgrey">mr</button>
-            <button className="btn_darkgrey">m-</button>
-            <button className="btn_orange">m+</button>
+            <Button>mc</Button>
+            <Button>mr</Button>
+            <Button>m-</Button>
+            <Button>m+</Button>
           </div>
           <div className="btn_row">
             <Button onClickHandler={addToInput}>7</Button>
             <Button onClickHandler={addToInput}>8</Button>
             <Button onClickHandler={addToInput}>9</Button>
-            <button className="btn_orange">x</button>
+            <Button>x</Button>
           </div>
           <div className="btn_row">
             <Button onClickHandler={addToInput}>4</Button>
             <Button onClickHandler={addToInput}>5</Button>
             <Button onClickHandler={addToInput}>6</Button>
-            <button className="btn_orange">-</button>
+            <Button onClickHandler={subtraction}>-</Button>
           </div>
           <div className="btn_row">
             <Button onClickHandler={addToInput}>1</Button>
