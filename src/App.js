@@ -7,6 +7,8 @@ function App() {
   const [input, setInput] = useState(0);
   const [previousNumber, setPreviousNumber] = useState();
   const [operator, setOperator] = useState();
+  const [memory, setMemory] = useState();
+  console.log('🚀 ~ file: App.js ~ line 11 ~ App ~ memory', memory);
 
   const addToInput = (value) => {
     if (input === 0) {
@@ -74,48 +76,46 @@ function App() {
     }
   };
 
+  const mPlusBtn = () => {
+    setMemory(input);
+    setInput('0');
+  };
+
+  const mMinusBtn = () => {
+    setMemory('');
+  };
+
   return (
     <div className="main_container">
       <div></div>
       <div className="container">
-        <Input input={input}>{input}</Input>
-
+        <Input input={input} memory={memory}>
+          {input}
+        </Input>
         <div className="btn_container">
-          <div className="btn_row">
-            <Button onClickHandler={clearInput}>AC</Button>
-            <Button>+/-</Button>
-            <Button>%</Button>
-            <Button onClickHandler={divideBtn}>/</Button>
-          </div>
-          <div className="btn_row">
-            <Button>mc</Button>
-            <Button>mr</Button>
-            <Button>m-</Button>
-            <Button>m+</Button>
-          </div>
-          <div className="btn_row">
-            <Button onClickHandler={addToInput}>7</Button>
-            <Button onClickHandler={addToInput}>8</Button>
-            <Button onClickHandler={addToInput}>9</Button>
-            <Button onClickHandler={multiplyBtn}>x</Button>
-          </div>
-          <div className="btn_row">
-            <Button onClickHandler={addToInput}>4</Button>
-            <Button onClickHandler={addToInput}>5</Button>
-            <Button onClickHandler={addToInput}>6</Button>
-            <Button onClickHandler={subtractionBtn}>-</Button>
-          </div>
-          <div className="btn_row">
-            <Button onClickHandler={addToInput}>1</Button>
-            <Button onClickHandler={addToInput}>2</Button>
-            <Button onClickHandler={addToInput}>3</Button>
-            <Button onClickHandler={additionBtn}>+</Button>
-          </div>
-          <div className="btn_row">
-            <Button onClickHandler={addZeroToInput}>0</Button>
-            <Button onClickHandler={addDecimalToInput}>.</Button>
-            <Button onClickHandler={equalBtn}>=</Button>
-          </div>
+          <Button onClickHandler={clearInput}>AC</Button>
+          <Button>+/-</Button>
+          <Button>%</Button>
+          <Button onClickHandler={divideBtn}>/</Button>
+          <Button>mc</Button>
+          <Button>mr</Button>
+          <Button>m-</Button>
+          <Button onClickHandler={mPlusBtn}>m+</Button>
+          <Button onClickHandler={addToInput}>7</Button>
+          <Button onClickHandler={addToInput}>8</Button>
+          <Button onClickHandler={addToInput}>9</Button>
+          <Button onClickHandler={multiplyBtn}>x</Button>
+          <Button onClickHandler={addToInput}>4</Button>
+          <Button onClickHandler={addToInput}>5</Button>
+          <Button onClickHandler={addToInput}>6</Button>
+          <Button onClickHandler={subtractionBtn}>-</Button>
+          <Button onClickHandler={addToInput}>1</Button>
+          <Button onClickHandler={addToInput}>2</Button>
+          <Button onClickHandler={addToInput}>3</Button>
+          <Button onClickHandler={additionBtn}>+</Button>
+          <Button onClickHandler={addZeroToInput}>0</Button>
+          <Button onClickHandler={addDecimalToInput}>.</Button>
+          <Button onClickHandler={equalBtn}>=</Button>
         </div>
       </div>
       <div></div>

@@ -13,8 +13,9 @@
 }
 
 .input_container {
+  display: grid;
+  grid-template-rows: 30px 1fr;
   margin-right: 15px;
-  margin-top: 20px;
 }
 
 .input {
@@ -22,6 +23,12 @@
   justify-content: flex-end;
   width: 100%;
   font-size: 50px;
+  color: white;
+}
+
+.memory {
+  display: flex;
+  justify-content: flex-end;
   color: white;
 }
 
@@ -48,10 +55,13 @@
 
 button {
   font-size: 30px;
-  height: 100%;
-  width: 19%;
+  /* height: 100%; */
+  /* width: 19%; */
+  width: 64px;
+  height: 63px;
   border-radius: 60px;
-  margin: 3%;
+  /* margin: 3%; */
+  margin: 10px;
   cursor: pointer;
 }
 
