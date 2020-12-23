@@ -5,15 +5,8 @@ import Button from './components/Button';
 
 function App() {
   const [input, setInput] = useState(0);
-  console.log('input===', input);
   const [previousNumber, setPreviousNumber] = useState();
-  console.log('previousNumber===', previousNumber);
-  const [currentNumber, setCurrentNumber] = useState();
-  console.log('currentNumber===', currentNumber);
   const [operator, setOperator] = useState();
-  console.log('operator===', operator);
-
-  // useEffect(() => {}, []);
 
   const addToInput = (value) => {
     if (input === 0) {
@@ -32,7 +25,13 @@ function App() {
   };
 
   const addZeroToInput = (value) => {
-    setInput(input + value);
+    if (input.includes('0.')) {
+      setInput(input + value);
+    } else if (input !== 0) {
+      setInput(input + value);
+    } else {
+      setInput(input);
+    }
   };
 
   const clearInput = () => {
@@ -41,22 +40,37 @@ function App() {
 
   const additionBtn = () => {
     setPreviousNumber(input);
-    setOperator('plus');
-    setInput(input);
+    setInput('');
+    setOperator('addition');
   };
 
-  const subtraction = () => {
+  const subtractionBtn = () => {
     setPreviousNumber(input);
-    setOperator('minus');
-    setInput(input);
+    setInput('');
+    setOperator('subtract');
+  };
+
+  const multiplyBtn = () => {
+    setPreviousNumber(input);
+    setInput('');
+    setOperator('multiply');
+  };
+
+  const divideBtn = () => {
+    setPreviousNumber(input);
+    setInput('');
+    setOperator('divide');
   };
 
   const equalBtn = () => {
-    setCurrentNumber(input);
-    if (operator === 'plus') {
-      setInput(parseInt(previousNumber) + parseInt(currentNumber));
-    } else if (operator === 'minus') {
-      setInput(parseInt(previousNumber) - parseInt(currentNumber));
+    if (operator === 'addition') {
+      setInput(parseInt(previousNumber) + parseInt(input));
+    } else if (operator === 'subtract') {
+      setInput(parseInt(previousNumber) - parseInt(input));
+    } else if (operator === 'multiply') {
+      setInput(parseInt(previousNumber) * parseInt(input));
+    } else if (operator === 'divide') {
+      setInput(parseInt(previousNumber) / parseInt(input));
     }
   };
 
@@ -71,7 +85,7 @@ function App() {
             <Button onClickHandler={clearInput}>AC</Button>
             <Button>+/-</Button>
             <Button>%</Button>
-            <Button>/</Button>
+            <Button onClickHandler={divideBtn}>/</Button>
           </div>
           <div className="btn_row">
             <Button>mc</Button>
@@ -83,13 +97,13 @@ function App() {
             <Button onClickHandler={addToInput}>7</Button>
             <Button onClickHandler={addToInput}>8</Button>
             <Button onClickHandler={addToInput}>9</Button>
-            <Button>x</Button>
+            <Button onClickHandler={multiplyBtn}>x</Button>
           </div>
           <div className="btn_row">
             <Button onClickHandler={addToInput}>4</Button>
             <Button onClickHandler={addToInput}>5</Button>
             <Button onClickHandler={addToInput}>6</Button>
-            <Button onClickHandler={subtraction}>-</Button>
+            <Button onClickHandler={subtractionBtn}>-</Button>
           </div>
           <div className="btn_row">
             <Button onClickHandler={addToInput}>1</Button>
