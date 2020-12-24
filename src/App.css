@@ -14,8 +14,14 @@
 
 .input_container {
   display: grid;
-  grid-template-rows: 30px 1fr;
+  grid-template-rows: 30px 60px 30px;
   margin-right: 15px;
+  margin-top: 5px;
+}
+.display {
+  display: flex;
+  justify-content: flex-end;
+  color: white;
 }
 
 .input {

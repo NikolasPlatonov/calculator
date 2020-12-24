@@ -8,7 +8,7 @@ function App() {
   const [previousNumber, setPreviousNumber] = useState();
   const [operator, setOperator] = useState();
   const [memory, setMemory] = useState();
-  console.log('🚀 ~ file: App.js ~ line 11 ~ App ~ memory', memory);
+  const [display, setDisplay] = useState();
 
   const addToInput = (value) => {
     if (input === 0) {
@@ -27,52 +27,94 @@ function App() {
   };
 
   const addZeroToInput = (value) => {
-    if (input.includes('0.')) {
+    if (input.includes('0.') || input !== 0) {
       setInput(input + value);
-    } else if (input !== 0) {
-      setInput(input + value);
-    } else {
-      setInput(input);
     }
+    // else if (input !== 0) {
+    //   setInput(input + value);
+    // } else {
+    //   setInput(input);
+    // }
   };
 
   const clearInput = () => {
     setInput(0);
+    setDisplay('');
   };
 
-  const additionBtn = () => {
+  const additionBtn = (symbol) => {
+    setDisplay(input + symbol);
     setPreviousNumber(input);
     setInput('');
     setOperator('addition');
   };
 
-  const subtractionBtn = () => {
+  const subtractionBtn = (symbol) => {
+    setDisplay(input + symbol);
     setPreviousNumber(input);
     setInput('');
     setOperator('subtract');
   };
 
-  const multiplyBtn = () => {
+  const multiplyBtn = (symbol) => {
+    setDisplay(input + symbol);
     setPreviousNumber(input);
     setInput('');
     setOperator('multiply');
   };
 
-  const divideBtn = () => {
+  const divideBtn = (symbol) => {
+    setDisplay(input + symbol);
     setPreviousNumber(input);
     setInput('');
     setOperator('divide');
   };
 
-  const equalBtn = () => {
+  const percentBtn = (symbol) => {
+    if (!previousNumber) {
+      return setInput(0);
+    } else {
+      setDisplay(display + input + symbol);
+      // setInput('');
+      setOperator(operator + ', ' + 'percent');
+    }
+  };
+
+  const equalBtn = (symbol) => {
     if (operator === 'addition') {
+      setDisplay(display + input + symbol);
       setInput(parseInt(previousNumber) + parseInt(input));
     } else if (operator === 'subtract') {
+      setDisplay(display + input + symbol);
       setInput(parseInt(previousNumber) - parseInt(input));
     } else if (operator === 'multiply') {
+      setDisplay(display + input + symbol);
       setInput(parseInt(previousNumber) * parseInt(input));
     } else if (operator === 'divide') {
+      setDisplay(display + input + symbol);
       setInput(parseInt(previousNumber) / parseInt(input));
+    } else if (operator.includes('percent') && operator.includes('addition')) {
+      setInput(
+        parseInt(previousNumber) +
+          (parseInt(previousNumber) * parseInt(input)) / 100
+      );
+    } else if (operator.includes('percent') && operator.includes('subtract')) {
+      setInput(
+        parseInt(previousNumber) -
+          (parseInt(previousNumber) * parseInt(input)) / 100
+      );
+    } else if (operator.includes('percent') && operator.includes('multiply')) {
+      setInput(
+        (parseInt(previousNumber) *
+          (parseInt(previousNumber) * parseInt(input))) /
+          100
+      );
+    } else if (operator.includes('percent') && operator.includes('divide')) {
+      setInput(
+        parseInt(previousNumber) /
+          (parseInt(previousNumber) * parseInt(input)) /
+          100
+      );
     }
   };
 
@@ -98,13 +140,13 @@ function App() {
     <div className="main_container">
       <div></div>
       <div className="container">
-        <Input input={input} memory={memory}>
+        <Input input={input} memory={memory} display={display}>
           {input}
         </Input>
         <div className="btn_container">
           <Button onClickHandler={clearInput}>AC</Button>
           <Button>+/-</Button>
-          <Button>%</Button>
+          <Button onClickHandler={percentBtn}>%</Button>
           <Button onClickHandler={divideBtn}>/</Button>
           <Button onClickHandler={mcBtn}>mc</Button>
           <Button onClickHandler={mrBtn}>mr</Button>
