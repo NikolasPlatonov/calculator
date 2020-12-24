@@ -5,10 +5,16 @@ import Button from './components/Button';
 
 function App() {
   const [input, setInput] = useState(0);
+  console.log(' ~ input', input);
   const [previousNumber, setPreviousNumber] = useState();
+  console.log(' ~ previousNumber', previousNumber);
+  const [currentNumber, setCurrentNumber] = useState();
+  console.log(' ~ currentNumber', currentNumber);
   const [operator, setOperator] = useState();
+  console.log(' ~ operator', operator);
   const [memory, setMemory] = useState();
   const [display, setDisplay] = useState();
+  console.log(' ~ display', display);
 
   const addToInput = (value) => {
     if (input === 0) {
@@ -27,19 +33,26 @@ function App() {
   };
 
   const addZeroToInput = (value) => {
-    if (input.includes('0.') || input !== 0) {
+    if (input === 0) {
+      setInput(input);
+    } else if (input.includes('.') || input !== 0) {
       setInput(input + value);
     }
-    // else if (input !== 0) {
-    //   setInput(input + value);
-    // } else {
-    //   setInput(input);
-    // }
   };
 
   const clearInput = () => {
     setInput(0);
     setDisplay('');
+  };
+
+  const plusMinusBtn = () => {
+    if (input === 0) {
+      setInput(input);
+    } else if (input < 0) {
+      setInput(-input);
+    } else {
+      setInput(-input);
+    }
   };
 
   const additionBtn = (symbol) => {
@@ -75,7 +88,6 @@ function App() {
       return setInput(0);
     } else {
       setDisplay(display + input + symbol);
-      // setInput('');
       setOperator(operator + ', ' + 'percent');
     }
   };
@@ -84,6 +96,8 @@ function App() {
     if (operator === 'addition') {
       setDisplay(display + input + symbol);
       setInput(parseInt(previousNumber) + parseInt(input));
+      console.log('~ parseInt', parseInt(previousNumber));
+      console.log('~ parseFloat', parseFloat(previousNumber));
     } else if (operator === 'subtract') {
       setDisplay(display + input + symbol);
       setInput(parseInt(previousNumber) - parseInt(input));
@@ -145,7 +159,7 @@ function App() {
         </Input>
         <div className="btn_container">
           <Button onClickHandler={clearInput}>AC</Button>
-          <Button>+/-</Button>
+          <Button onClickHandler={plusMinusBtn}>+/-</Button>
           <Button onClickHandler={percentBtn}>%</Button>
           <Button onClickHandler={divideBtn}>/</Button>
           <Button onClickHandler={mcBtn}>mc</Button>
