@@ -5,21 +5,15 @@ import Button from './components/Button';
 
 function App() {
   const [input, setInput] = useState(0);
-  console.log(' ~ input', input);
   const [previousNumber, setPreviousNumber] = useState();
-  console.log(' ~ previousNumber', previousNumber);
-  const [currentNumber, setCurrentNumber] = useState();
-  console.log(' ~ currentNumber', currentNumber);
   const [operator, setOperator] = useState();
-  console.log(' ~ operator', operator);
   const [memory, setMemory] = useState();
   const [display, setDisplay] = useState();
-  console.log(' ~ display', display);
 
   const addToInput = (value) => {
     if (input === 0) {
       setInput(value);
-    } else {
+    } else if (input.length <= 12) {
       setInput(input + value);
     }
   };
