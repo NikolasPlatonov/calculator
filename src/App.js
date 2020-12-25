@@ -13,7 +13,7 @@ function App() {
   const addToInput = (value) => {
     if (input === 0) {
       setInput(value);
-    } else if (input.length <= 12) {
+    } else {
       setInput(input + value);
     }
   };
@@ -90,27 +90,23 @@ function App() {
     if (operator === 'addition') {
       let displayValue = display + input + symbol;
       let displayedInput = parseFloat(previousNumber) + parseFloat(input);
-      let isDecimalValue = input.indexOf('.') === -1;
       setDisplay(displayValue);
-      setInput(!isDecimalValue ? displayedInput.toFixed(1) : displayedInput);
+      setInput(displayedInput);
     } else if (operator === 'subtract') {
       let displayValue = display + input + symbol;
       let displayedInput = parseFloat(previousNumber) - parseFloat(input);
-      let isDecimalValue = input.indexOf('.') === -1;
       setDisplay(displayValue);
-      setInput(!isDecimalValue ? displayedInput.toFixed(1) : displayedInput);
+      setInput(displayedInput);
     } else if (operator === 'multiply') {
       let displayValue = display + input + symbol;
       let displayedInput = parseFloat(previousNumber) * parseFloat(input);
-      let isDecimalValue = input.indexOf('.') === -1;
       setDisplay(displayValue);
-      setInput(!isDecimalValue ? displayedInput.toFixed(1) : displayedInput);
+      setInput(displayedInput);
     } else if (operator === 'divide') {
       let displayValue = display + input + symbol;
       let displayedInput = parseFloat(previousNumber) / parseFloat(input);
-      let isDecimalValue = input.indexOf('.') === -1;
       setDisplay(displayValue);
-      setInput(!isDecimalValue ? displayedInput.toFixed(1) : displayedInput);
+      setInput(displayedInput);
     } else if (operator.includes('percent') && operator.includes('addition')) {
       setInput(
         parseFloat(previousNumber) +
