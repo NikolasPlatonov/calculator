@@ -94,51 +94,61 @@ function App() {
 
   const equalBtn = (symbol) => {
     if (operator === 'addition') {
-      setDisplay(display + input + symbol);
-      setInput(parseInt(previousNumber) + parseInt(input));
-      console.log('~ parseInt', parseInt(previousNumber));
-      console.log('~ parseFloat', parseFloat(previousNumber));
+      let displayValue = display + input + symbol;
+      let displayedInput = parseFloat(previousNumber) + parseFloat(input);
+      let isDecimalValue = input.indexOf('.') === -1;
+      setDisplay(displayValue);
+      setInput(!isDecimalValue ? displayedInput.toFixed(1) : displayedInput);
     } else if (operator === 'subtract') {
-      setDisplay(display + input + symbol);
-      setInput(parseInt(previousNumber) - parseInt(input));
+      let displayValue = display + input + symbol;
+      let displayedInput = parseFloat(previousNumber) - parseFloat(input);
+      let isDecimalValue = input.indexOf('.') === -1;
+      setDisplay(displayValue);
+      setInput(!isDecimalValue ? displayedInput.toFixed(1) : displayedInput);
     } else if (operator === 'multiply') {
-      setDisplay(display + input + symbol);
-      setInput(parseInt(previousNumber) * parseInt(input));
+      let displayValue = display + input + symbol;
+      let displayedInput = parseFloat(previousNumber) * parseFloat(input);
+      let isDecimalValue = input.indexOf('.') === -1;
+      setDisplay(displayValue);
+      setInput(!isDecimalValue ? displayedInput.toFixed(1) : displayedInput);
     } else if (operator === 'divide') {
-      setDisplay(display + input + symbol);
-      setInput(parseInt(previousNumber) / parseInt(input));
+      let displayValue = display + input + symbol;
+      let displayedInput = parseFloat(previousNumber) / parseFloat(input);
+      let isDecimalValue = input.indexOf('.') === -1;
+      setDisplay(displayValue);
+      setInput(!isDecimalValue ? displayedInput.toFixed(1) : displayedInput);
     } else if (operator.includes('percent') && operator.includes('addition')) {
       setInput(
-        parseInt(previousNumber) +
-          (parseInt(previousNumber) * parseInt(input)) / 100
+        parseFloat(previousNumber) +
+          (parseFloat(previousNumber) * parseFloat(input)) / 100
       );
     } else if (operator.includes('percent') && operator.includes('subtract')) {
       setInput(
-        parseInt(previousNumber) -
-          (parseInt(previousNumber) * parseInt(input)) / 100
+        parseFloat(previousNumber) -
+          (parseFloat(previousNumber) * parseFloat(input)) / 100
       );
     } else if (operator.includes('percent') && operator.includes('multiply')) {
       setInput(
-        (parseInt(previousNumber) *
-          (parseInt(previousNumber) * parseInt(input))) /
+        (parseFloat(previousNumber) *
+          (parseFloat(previousNumber) * parseFloat(input))) /
           100
       );
     } else if (operator.includes('percent') && operator.includes('divide')) {
       setInput(
-        parseInt(previousNumber) /
-          (parseInt(previousNumber) * parseInt(input)) /
+        parseFloat(previousNumber) /
+          (parseFloat(previousNumber) * parseFloat(input)) /
           100
       );
     }
   };
 
   const mPlusBtn = () => {
-    setMemory(parseInt(memory) + parseInt(input));
+    setMemory(parseFloat(memory) + parseFloat(input));
     setInput(input);
   };
 
   const mMinusBtn = () => {
-    setMemory(parseInt(memory) - parseInt(input));
+    setMemory(parseFloat(memory) - parseFloat(input));
     setInput(input);
   };
 
