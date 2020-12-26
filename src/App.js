@@ -5,8 +5,17 @@ import Button from './components/Button';
 
 function App() {
   const [input, setInput] = useState(0);
-  const [previousNumber, setPreviousNumber] = useState();
-  const [operator, setOperator] = useState();
+  console.log('input', input);
+  const [firstNumber, setFirstNumber] = useState();
+  console.log('firstNumber', firstNumber);
+  const [secondNumber, setSecondNumber] = useState();
+  console.log('secondNumber', secondNumber);
+  const [stringOperatorValue, setStringOperatorValue] = useState();
+  console.log('stringOperatorValue', stringOperatorValue);
+  const [symbolOperator, setSymbolOperator] = useState();
+  console.log('symbolOperator', symbolOperator);
+  const [equalOperator, setEqualOperator] = useState();
+  console.log('equalOperator', equalOperator);
   const [memory, setMemory] = useState();
   const [display, setDisplay] = useState();
 
@@ -36,7 +45,10 @@ function App() {
 
   const clearInput = () => {
     setInput(0);
-    setDisplay('');
+    setFirstNumber('');
+    setSymbolOperator('');
+    setSecondNumber('');
+    setEqualOperator('');
   };
 
   const plusMinusBtn = () => {
@@ -50,83 +62,105 @@ function App() {
   };
 
   const additionBtn = (symbol) => {
-    setDisplay(input + symbol);
-    setPreviousNumber(input);
+    setFirstNumber(input);
+    setSymbolOperator(symbol);
     setInput('');
-    setOperator('addition');
+    setStringOperatorValue('addition');
   };
 
   const subtractionBtn = (symbol) => {
     setDisplay(input + symbol);
-    setPreviousNumber(input);
+    setFirstNumber(input);
     setInput('');
-    setOperator('subtract');
+    setStringOperatorValue('subtract');
   };
 
   const multiplyBtn = (symbol) => {
     setDisplay(input + symbol);
-    setPreviousNumber(input);
+    setFirstNumber(input);
     setInput('');
-    setOperator('multiply');
+    setStringOperatorValue('multiply');
   };
 
   const divideBtn = (symbol) => {
     setDisplay(input + symbol);
-    setPreviousNumber(input);
+    setFirstNumber(input);
     setInput('');
-    setOperator('divide');
+    setStringOperatorValue('divide');
   };
 
   const percentBtn = (symbol) => {
-    if (!previousNumber) {
+    if (!firstNumber) {
       return setInput(0);
     } else {
       setDisplay(display + input + symbol);
-      setOperator(operator + ', ' + 'percent');
+      setStringOperatorValue(stringOperatorValue + ', ' + 'percent');
     }
   };
 
   const equalBtn = (symbol) => {
-    if (operator === 'addition') {
+    if (stringOperatorValue === 'addition') {
+      let displayedInput = parseFloat(firstNumber) + parseFloat(input);
+      setInput(displayedInput);
+      setSecondNumber(input);
+      setEqualOperator(symbol);
+      setStringOperatorValue(stringOperatorValue + '=');
+      /////////////////
+    } else if (stringOperatorValue.includes('=')) {
+      let displayedInput = parseFloat(secondNumber) + parseFloat(input);
+      setInput(displayedInput);
+      setFirstNumber(input);
+      setEqualOperator(symbol);
+    }
+
+    /////////////////////////////////////////////////
+    else if (stringOperatorValue === 'subtract') {
       let displayValue = display + input + symbol;
-      let displayedInput = parseFloat(previousNumber) + parseFloat(input);
+      let displayedInput = parseFloat(firstNumber) - parseFloat(input);
       setDisplay(displayValue);
       setInput(displayedInput);
-    } else if (operator === 'subtract') {
+    } else if (stringOperatorValue === 'multiply') {
       let displayValue = display + input + symbol;
-      let displayedInput = parseFloat(previousNumber) - parseFloat(input);
+      let displayedInput = parseFloat(firstNumber) * parseFloat(input);
       setDisplay(displayValue);
       setInput(displayedInput);
-    } else if (operator === 'multiply') {
+    } else if (stringOperatorValue === 'divide') {
       let displayValue = display + input + symbol;
-      let displayedInput = parseFloat(previousNumber) * parseFloat(input);
+      let displayedInput = parseFloat(firstNumber) / parseFloat(input);
       setDisplay(displayValue);
       setInput(displayedInput);
-    } else if (operator === 'divide') {
-      let displayValue = display + input + symbol;
-      let displayedInput = parseFloat(previousNumber) / parseFloat(input);
-      setDisplay(displayValue);
-      setInput(displayedInput);
-    } else if (operator.includes('percent') && operator.includes('addition')) {
+    } else if (
+      stringOperatorValue.includes('percent') &&
+      stringOperatorValue.includes('addition')
+    ) {
       setInput(
-        parseFloat(previousNumber) +
-          (parseFloat(previousNumber) * parseFloat(input)) / 100
+        parseFloat(firstNumber) +
+          (parseFloat(firstNumber) * parseFloat(input)) / 100
       );
-    } else if (operator.includes('percent') && operator.includes('subtract')) {
+    } else if (
+      stringOperatorValue.includes('percent') &&
+      stringOperatorValue.includes('subtract')
+    ) {
       setInput(
-        parseFloat(previousNumber) -
-          (parseFloat(previousNumber) * parseFloat(input)) / 100
+        parseFloat(firstNumber) -
+          (parseFloat(firstNumber) * parseFloat(input)) / 100
       );
-    } else if (operator.includes('percent') && operator.includes('multiply')) {
+    } else if (
+      stringOperatorValue.includes('percent') &&
+      stringOperatorValue.includes('multiply')
+    ) {
       setInput(
-        (parseFloat(previousNumber) *
-          (parseFloat(previousNumber) * parseFloat(input))) /
+        (parseFloat(firstNumber) *
+          (parseFloat(firstNumber) * parseFloat(input))) /
           100
       );
-    } else if (operator.includes('percent') && operator.includes('divide')) {
+    } else if (
+      stringOperatorValue.includes('percent') &&
+      stringOperatorValue.includes('divide')
+    ) {
       setInput(
-        parseFloat(previousNumber) /
-          (parseFloat(previousNumber) * parseFloat(input)) /
+        parseFloat(firstNumber) /
+          (parseFloat(firstNumber) * parseFloat(input)) /
           100
       );
     }
@@ -154,7 +188,15 @@ function App() {
     <div className="main_container">
       <div></div>
       <div className="container">
-        <Input input={input} memory={memory} display={display}>
+        <Input
+          firstNumber={firstNumber}
+          secondNumber={secondNumber}
+          symbolOperator={symbolOperator}
+          stringOperatorValue={stringOperatorValue}
+          equalOperator={equalOperator}
+          input={input}
+          memory={memory}
+        >
           {input}
         </Input>
         <div className="btn_container">
