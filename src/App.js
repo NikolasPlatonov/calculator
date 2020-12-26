@@ -69,22 +69,22 @@ function App() {
   };
 
   const subtractionBtn = (symbol) => {
-    setDisplay(input + symbol);
     setFirstNumber(input);
+    setSymbolOperator(symbol);
     setInput('');
     setStringOperatorValue('subtract');
   };
 
   const multiplyBtn = (symbol) => {
-    setDisplay(input + symbol);
     setFirstNumber(input);
+    setSymbolOperator(symbol);
     setInput('');
     setStringOperatorValue('multiply');
   };
 
   const divideBtn = (symbol) => {
-    setDisplay(input + symbol);
     setFirstNumber(input);
+    setSymbolOperator(symbol);
     setInput('');
     setStringOperatorValue('divide');
   };
@@ -100,35 +100,41 @@ function App() {
 
   const equalBtn = (symbol) => {
     if (stringOperatorValue === 'addition') {
-      let displayedInput = parseFloat(firstNumber) + parseFloat(input);
-      setInput(displayedInput);
+      setInput(parseFloat(firstNumber) + parseFloat(input));
       setSecondNumber(input);
       setEqualOperator(symbol);
-      setStringOperatorValue(stringOperatorValue + '=');
-      /////////////////
-    } else if (stringOperatorValue.includes('=')) {
-      let displayedInput = parseFloat(secondNumber) + parseFloat(input);
-      setInput(displayedInput);
+      setStringOperatorValue(stringOperatorValue + '_again');
+    } else if (stringOperatorValue === 'addition_again') {
+      setInput(parseFloat(secondNumber) + parseFloat(input));
       setFirstNumber(input);
       setEqualOperator(symbol);
-    }
-
-    /////////////////////////////////////////////////
-    else if (stringOperatorValue === 'subtract') {
-      let displayValue = display + input + symbol;
-      let displayedInput = parseFloat(firstNumber) - parseFloat(input);
-      setDisplay(displayValue);
-      setInput(displayedInput);
+    } else if (stringOperatorValue === 'subtract') {
+      setInput(parseFloat(firstNumber) - parseFloat(input));
+      setSecondNumber(input);
+      setEqualOperator(symbol);
+      setStringOperatorValue(stringOperatorValue + '_again');
+    } else if (stringOperatorValue === 'subtract_again') {
+      setInput(parseFloat(input) - parseFloat(secondNumber));
+      setFirstNumber(input);
+      setEqualOperator(symbol);
     } else if (stringOperatorValue === 'multiply') {
-      let displayValue = display + input + symbol;
-      let displayedInput = parseFloat(firstNumber) * parseFloat(input);
-      setDisplay(displayValue);
-      setInput(displayedInput);
+      setInput(parseFloat(firstNumber) * parseFloat(input));
+      setSecondNumber(input);
+      setEqualOperator(symbol);
+      setStringOperatorValue(stringOperatorValue + '_again');
+    } else if (stringOperatorValue === 'multiply_again') {
+      setInput(parseFloat(secondNumber) * parseFloat(input));
+      setFirstNumber(input);
+      setEqualOperator(symbol);
     } else if (stringOperatorValue === 'divide') {
-      let displayValue = display + input + symbol;
-      let displayedInput = parseFloat(firstNumber) / parseFloat(input);
-      setDisplay(displayValue);
-      setInput(displayedInput);
+      setInput(parseFloat(firstNumber) / parseFloat(input));
+      setSecondNumber(input);
+      setEqualOperator(symbol);
+      setStringOperatorValue(stringOperatorValue + '_again');
+    } else if (stringOperatorValue === 'divide_again') {
+      setInput(parseFloat(input) / parseFloat(secondNumber));
+      setFirstNumber(input);
+      setEqualOperator(symbol);
     } else if (
       stringOperatorValue.includes('percent') &&
       stringOperatorValue.includes('addition')
