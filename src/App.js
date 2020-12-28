@@ -54,32 +54,22 @@ function App() {
     }
   };
 
-  const additionBtn = (symbol) => {
-    setFirstNumber(input);
-    setSymbolOperator(symbol);
-    setInput('');
-    setStringOperatorValue('addition');
-  };
-
-  const subtractionBtn = (symbol) => {
-    setFirstNumber(input);
-    setSymbolOperator(symbol);
-    setInput('');
-    setStringOperatorValue('subtract');
-  };
-
-  const multiplyBtn = (symbol) => {
-    setFirstNumber(input);
-    setSymbolOperator(symbol);
-    setInput('');
-    setStringOperatorValue('multiply');
-  };
-
-  const divideBtn = (symbol) => {
-    setFirstNumber(input);
-    setSymbolOperator(symbol);
-    setInput('');
-    setStringOperatorValue('divide');
+  const operatorBtn = (symbol) => {
+    let operatorsNames = [
+      { operator: '+', name: 'addition' },
+      { operator: '-', name: 'subtract' },
+      { operator: '*', name: 'multiply' },
+      { operator: '/', name: 'divide' },
+    ];
+    for (let item of operatorsNames) {
+      if (symbol === item.operator) {
+        setFirstNumber(input);
+        setSymbolOperator(item.operator);
+        setInput('');
+        setStringOperatorValue(item.name);
+        break;
+      }
+    }
   };
 
   const percentBtn = () => {
@@ -209,7 +199,7 @@ function App() {
           <Button className={'btn_lightgrey'} onClickHandler={percentBtn}>
             %
           </Button>
-          <Button className={'btn_orange'} onClickHandler={divideBtn}>
+          <Button className={'btn_orange'} onClickHandler={operatorBtn}>
             /
           </Button>
           <Button className={'btn_darkgrey'} onClickHandler={mcBtn}>
@@ -233,8 +223,8 @@ function App() {
           <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
             9
           </Button>
-          <Button className={'btn_orange'} onClickHandler={multiplyBtn}>
-            x
+          <Button className={'btn_orange'} onClickHandler={operatorBtn}>
+            *
           </Button>
           <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
             4
@@ -245,7 +235,7 @@ function App() {
           <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
             6
           </Button>
-          <Button className={'btn_orange'} onClickHandler={subtractionBtn}>
+          <Button className={'btn_orange'} onClickHandler={operatorBtn}>
             -
           </Button>
           <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
@@ -257,7 +247,7 @@ function App() {
           <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
             3
           </Button>
-          <Button className={'btn_orange'} onClickHandler={additionBtn}>
+          <Button className={'btn_orange'} onClickHandler={operatorBtn}>
             +
           </Button>
           <Button className={'btn_null'} onClickHandler={addZeroToInput}>
