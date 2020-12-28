@@ -31,7 +31,7 @@ function App() {
   const addZeroToInput = (value) => {
     if (input === 0) {
       setInput(input);
-    } else if (input.includes('.') || input !== 0) {
+    } else if (String(input).includes('0.') || input !== 0) {
       setInput(input + value);
     }
   };
