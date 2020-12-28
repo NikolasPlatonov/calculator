@@ -5,21 +5,10 @@ import Button from './components/Button';
 
 function App() {
   const [input, setInput] = useState(0);
-  console.log('🚀 ~ file: App.js ~ line 8 ~ App ~ input', input);
   const [firstNumber, setFirstNumber] = useState();
-  console.log('🚀 ~ file: App.js ~ line 10 ~ App ~ firstNumber', firstNumber);
   const [secondNumber, setSecondNumber] = useState();
-  console.log('🚀 ~ file: App.js ~ line 12 ~ App ~ secondNumber', secondNumber);
   const [stringOperatorValue, setStringOperatorValue] = useState();
-  console.log(
-    '🚀 ~ file: App.js ~ line 14 ~ App ~ stringOperatorValue',
-    stringOperatorValue
-  );
   const [symbolOperator, setSymbolOperator] = useState();
-  console.log(
-    '🚀 ~ file: App.js ~ line 16 ~ App ~ symbolOperator',
-    symbolOperator
-  );
   const [equalOperator, setEqualOperator] = useState();
   const [memory, setMemory] = useState();
 
@@ -93,11 +82,11 @@ function App() {
     setStringOperatorValue('divide');
   };
 
-  const percentBtn = (symbol) => {
+  const percentBtn = () => {
     if (!firstNumber) {
       return setInput(0);
     } else {
-      setSecondNumber(input + symbol);
+      setSecondNumber((parseFloat(firstNumber) * parseFloat(input)) / 100);
       setInput('');
       setStringOperatorValue(stringOperatorValue + ', ' + 'percent');
     }
@@ -140,39 +129,40 @@ function App() {
       setInput(parseFloat(input) / parseFloat(secondNumber));
       setFirstNumber(input);
       setEqualOperator(symbol);
-    } else if (
-      stringOperatorValue.includes('percent') &&
-      stringOperatorValue.includes('addition')
-    ) {
-      setInput(
-        parseFloat(firstNumber) +
-          (parseFloat(firstNumber) * parseFloat(secondNumber)) / 100
-      );
-    } else if (
-      stringOperatorValue.includes('percent') &&
-      stringOperatorValue.includes('subtract')
-    ) {
-      setInput(
-        parseFloat(firstNumber) -
-          (parseFloat(firstNumber) * parseFloat(secondNumber)) / 100
-      );
-    } else if (
-      stringOperatorValue.includes('percent') &&
-      stringOperatorValue.includes('multiply')
-    ) {
-      setInput(
-        (parseFloat(firstNumber) *
-          (parseFloat(firstNumber) * parseFloat(secondNumber))) /
-          100
-      );
-    } else if (
-      stringOperatorValue.includes('percent') &&
-      stringOperatorValue.includes('divide')
-    ) {
-      setInput(
-        parseFloat(firstNumber) /
-          ((parseFloat(firstNumber) * parseFloat(secondNumber)) / 100)
-      );
+    } else if (stringOperatorValue === 'addition, percent') {
+      setInput(parseFloat(firstNumber) + parseFloat(secondNumber));
+      setEqualOperator(symbol);
+      setStringOperatorValue(stringOperatorValue + '_again');
+    } else if (stringOperatorValue.includes('addition, percent_again')) {
+      setFirstNumber(input);
+      setInput(parseFloat(input) + parseFloat(secondNumber));
+      setEqualOperator(symbol);
+    } else if (stringOperatorValue === 'subtract, percent') {
+      setInput(parseFloat(firstNumber) - parseFloat(secondNumber));
+      setEqualOperator(symbol);
+      setStringOperatorValue(stringOperatorValue + '_again');
+    } else if (stringOperatorValue.includes('subtract, percent_again')) {
+      setFirstNumber(input);
+      setInput(parseFloat(input) - parseFloat(secondNumber));
+      setEqualOperator(symbol);
+    } else if (stringOperatorValue === 'multiply, percent') {
+      setInput(parseFloat(firstNumber) * parseFloat(secondNumber));
+      setFirstNumber(parseFloat(firstNumber) * parseFloat(secondNumber));
+      setEqualOperator(symbol);
+      setStringOperatorValue(stringOperatorValue + '_again');
+    } else if (stringOperatorValue.includes('multiply, percent_again')) {
+      setInput(parseFloat(input) * parseFloat(secondNumber));
+      setFirstNumber(parseFloat(input) * parseFloat(secondNumber));
+      setEqualOperator(symbol);
+    } else if (stringOperatorValue === 'divide, percent') {
+      setInput(parseFloat(firstNumber) / parseFloat(secondNumber));
+      setFirstNumber(parseFloat(firstNumber) / parseFloat(secondNumber));
+      setEqualOperator(symbol);
+      setStringOperatorValue(stringOperatorValue + '_again');
+    } else if (stringOperatorValue.includes('divide, percent_again')) {
+      setFirstNumber(input);
+      setInput(parseFloat(input) / parseFloat(secondNumber));
+      setEqualOperator(symbol);
     }
   };
 
