@@ -200,29 +200,75 @@ function App() {
           {input}
         </Input>
         <div className="btn_container">
-          <Button onClickHandler={clearInput}>AC</Button>
-          <Button onClickHandler={plusMinusBtn}>+/-</Button>
-          <Button onClickHandler={percentBtn}>%</Button>
-          <Button onClickHandler={divideBtn}>/</Button>
-          <Button onClickHandler={mcBtn}>mc</Button>
-          <Button onClickHandler={mrBtn}>mr</Button>
-          <Button onClickHandler={mMinusBtn}>m-</Button>
-          <Button onClickHandler={mPlusBtn}>m+</Button>
-          <Button onClickHandler={addToInput}>7</Button>
-          <Button onClickHandler={addToInput}>8</Button>
-          <Button onClickHandler={addToInput}>9</Button>
-          <Button onClickHandler={multiplyBtn}>x</Button>
-          <Button onClickHandler={addToInput}>4</Button>
-          <Button onClickHandler={addToInput}>5</Button>
-          <Button onClickHandler={addToInput}>6</Button>
-          <Button onClickHandler={subtractionBtn}>-</Button>
-          <Button onClickHandler={addToInput}>1</Button>
-          <Button onClickHandler={addToInput}>2</Button>
-          <Button onClickHandler={addToInput}>3</Button>
-          <Button onClickHandler={additionBtn}>+</Button>
-          <Button onClickHandler={addZeroToInput}>0</Button>
-          <Button onClickHandler={addDecimalToInput}>.</Button>
-          <Button onClickHandler={equalBtn}>=</Button>
+          <Button className={'btn_lightgrey'} onClickHandler={clearInput}>
+            AC
+          </Button>
+          <Button className={'btn_lightgrey'} onClickHandler={plusMinusBtn}>
+            +/-
+          </Button>
+          <Button className={'btn_lightgrey'} onClickHandler={percentBtn}>
+            %
+          </Button>
+          <Button className={'btn_orange'} onClickHandler={divideBtn}>
+            /
+          </Button>
+          <Button className={'btn_darkgrey'} onClickHandler={mcBtn}>
+            mc
+          </Button>
+          <Button className={'btn_darkgrey'} onClickHandler={mrBtn}>
+            mr
+          </Button>
+          <Button className={'btn_darkgrey'} onClickHandler={mMinusBtn}>
+            m-
+          </Button>
+          <Button className={'btn_orange'} onClickHandler={mPlusBtn}>
+            m+
+          </Button>
+          <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
+            7
+          </Button>
+          <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
+            8
+          </Button>
+          <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
+            9
+          </Button>
+          <Button className={'btn_orange'} onClickHandler={multiplyBtn}>
+            x
+          </Button>
+          <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
+            4
+          </Button>
+          <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
+            5
+          </Button>
+          <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
+            6
+          </Button>
+          <Button className={'btn_orange'} onClickHandler={subtractionBtn}>
+            -
+          </Button>
+          <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
+            1
+          </Button>
+          <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
+            2
+          </Button>
+          <Button className={'btn_darkgrey'} onClickHandler={addToInput}>
+            3
+          </Button>
+          <Button className={'btn_orange'} onClickHandler={additionBtn}>
+            +
+          </Button>
+          <Button className={'btn_null'} onClickHandler={addZeroToInput}>
+            0
+          </Button>
+          <Button className={'btn_darkgrey'} onClickHandler={addDecimalToInput}>
+            .
+          </Button>
+          <Button className={'btn_orange'} onClickHandler={equalBtn}>
+            =
+          </Button>
         </div>
       </div>
       <div></div>
