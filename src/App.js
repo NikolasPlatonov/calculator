@@ -5,13 +5,23 @@ import Button from './components/Button';
 
 function App() {
   const [input, setInput] = useState(0);
+  console.log('🚀 ~ file: App.js ~ line 8 ~ App ~ input', input);
   const [firstNumber, setFirstNumber] = useState();
+  console.log('🚀 ~ file: App.js ~ line 10 ~ App ~ firstNumber', firstNumber);
   const [secondNumber, setSecondNumber] = useState();
+  console.log('🚀 ~ file: App.js ~ line 12 ~ App ~ secondNumber', secondNumber);
   const [stringOperatorValue, setStringOperatorValue] = useState();
+  console.log(
+    '🚀 ~ file: App.js ~ line 14 ~ App ~ stringOperatorValue',
+    stringOperatorValue
+  );
   const [symbolOperator, setSymbolOperator] = useState();
+  console.log(
+    '🚀 ~ file: App.js ~ line 16 ~ App ~ symbolOperator',
+    symbolOperator
+  );
   const [equalOperator, setEqualOperator] = useState();
   const [memory, setMemory] = useState();
-  const [display, setDisplay] = useState();
 
   const addToInput = (value) => {
     if (input === 0) {
@@ -87,7 +97,8 @@ function App() {
     if (!firstNumber) {
       return setInput(0);
     } else {
-      setDisplay(display + input + symbol);
+      setSecondNumber(input + symbol);
+      setInput('');
       setStringOperatorValue(stringOperatorValue + ', ' + 'percent');
     }
   };
@@ -135,7 +146,7 @@ function App() {
     ) {
       setInput(
         parseFloat(firstNumber) +
-          (parseFloat(firstNumber) * parseFloat(input)) / 100
+          (parseFloat(firstNumber) * parseFloat(secondNumber)) / 100
       );
     } else if (
       stringOperatorValue.includes('percent') &&
@@ -143,7 +154,7 @@ function App() {
     ) {
       setInput(
         parseFloat(firstNumber) -
-          (parseFloat(firstNumber) * parseFloat(input)) / 100
+          (parseFloat(firstNumber) * parseFloat(secondNumber)) / 100
       );
     } else if (
       stringOperatorValue.includes('percent') &&
@@ -151,7 +162,7 @@ function App() {
     ) {
       setInput(
         (parseFloat(firstNumber) *
-          (parseFloat(firstNumber) * parseFloat(input))) /
+          (parseFloat(firstNumber) * parseFloat(secondNumber))) /
           100
       );
     } else if (
@@ -160,8 +171,7 @@ function App() {
     ) {
       setInput(
         parseFloat(firstNumber) /
-          (parseFloat(firstNumber) * parseFloat(input)) /
-          100
+          ((parseFloat(firstNumber) * parseFloat(secondNumber)) / 100)
       );
     }
   };
@@ -181,7 +191,7 @@ function App() {
   };
 
   const mrBtn = () => {
-    setMemory(input);
+    memory ? setInput(memory) : setMemory(input);
   };
 
   return (
