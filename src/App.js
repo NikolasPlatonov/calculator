@@ -5,17 +5,11 @@ import Button from './components/Button';
 
 function App() {
   const [input, setInput] = useState(0);
-  console.log('input', input);
   const [firstNumber, setFirstNumber] = useState();
-  console.log('firstNumber', firstNumber);
   const [secondNumber, setSecondNumber] = useState();
-  console.log('secondNumber', secondNumber);
   const [stringOperatorValue, setStringOperatorValue] = useState();
-  console.log('stringOperatorValue', stringOperatorValue);
   const [symbolOperator, setSymbolOperator] = useState();
-  console.log('symbolOperator', symbolOperator);
   const [equalOperator, setEqualOperator] = useState();
-  console.log('equalOperator', equalOperator);
   const [memory, setMemory] = useState();
   const [display, setDisplay] = useState();
 
